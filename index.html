@@ -51,7 +51,12 @@ button:hover,.pdf:hover{transform:translateY(-2px);filter:brightness(1.12)}
 .mission-trigger{cursor:pointer;outline:none;transition:transform .25s ease,box-shadow .25s ease}
 .mission-trigger:hover,.mission-trigger:focus-visible{transform:translateY(-3px);box-shadow:0 0 0 2px var(--gold),0 18px 45px #0009}
 .mission-trigger:active{transform:scale(.985)}
-.scene-label{padding:0 30px}
+.scene-label{padding:0 30px}\n
+.scene-pdf{display:none;position:absolute;z-index:4;left:50%;bottom:48px;transform:translateX(-50%);width:max-content;max-width:calc(100% - 34px);padding:14px 20px;background:linear-gradient(135deg,#f0d48c,#bd9144);color:#101c2c!important;border:1px solid #fff0bd;border-radius:999px;font-size:12px;font-weight:900;letter-spacing:.06em;text-align:center;box-shadow:0 8px 28px #000b}
+.scene.open .scene-pdf{display:inline-flex;align-items:center;justify-content:center}
+.scene.open .scene-label{bottom:12px}
+@media(max-width:600px){.scene-pdf{bottom:44px;font-size:10px;padding:12px 14px;white-space:normal}.scene.open .scene-label{font-size:8px}}
+
 \n
 .pdf-primary{display:inline-flex;align-items:center;justify-content:center;margin:12px auto 16px;padding:17px 28px;background:linear-gradient(135deg,#e4c77e,#a87b35);color:#101c2c!important;border:1px solid #f0d48c;font-size:14px;font-weight:900;letter-spacing:.08em;box-shadow:0 8px 28px #c99e4b55;text-align:center}
 .pdf-primary:hover{filter:brightness(1.12);transform:translateY(-2px)}
@@ -71,11 +76,11 @@ button:hover,.pdf:hover{transform:translateY(-2px);filter:brightness(1.12)}
        aria-label="Toca na mala para iniciar a Operação Natal">
     <div class="briefcase"><div class="money"></div><div class="hinge"></div></div>
     <div class="scene-label" id="sceneLabel">TOCA NA MALA PARA INICIAR A OPERAÇÃO</div>
+    <a class="pdf scene-pdf" id="scenePdf" href="dossier-operacao-natal.pdf" target="_blank" rel="noopener">📂 ABRIR DOSSIER CLASSIFICADO ↗</a>
   </div>
   <section class="reveal" id="reveal">
     <div class="classified">✓ ACESSO AUTORIZADO</div>
     <h3>Missão: encontrar o presente perfeito.</h3>
-    <a class="pdf pdf-primary" href="dossier-operacao-natal.pdf" target="_blank" rel="noopener">📂 ABRIR DOSSIER CLASSIFICADO ↗</a>
     <p>O destino do Natal está nas tuas mãos. O dossier contém informação altamente confidencial — incluindo um pedido financeiro de proporções… generosas.</p>
     <div class="access" id="musicStatus">♫ BANDA SONORA: À ESPERA</div>
     <div id="musicPlayer" class="hidden" style="margin:18px auto;max-width:560px">
@@ -140,7 +145,7 @@ function launchOperation(){
   const reveal=document.getElementById('reveal');
   reveal.classList.add('show');
   startChristmasMusic();
-  setTimeout(()=>reveal.scrollIntoView({behavior:'smooth',block:'start'}),180);
+  setTimeout(()=>document.getElementById('scene').scrollIntoView({behavior:'smooth',block:'center'}),180);
 }
 document.getElementById('scene').addEventListener('click',launchOperation);
 document.getElementById('scene').addEventListener('keydown',(event)=>{
