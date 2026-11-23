@@ -22,3 +22,4 @@ A reprodução começa no primeiro clique em **INICIAR OPERAÇÃO**. Os navegado
 O GitHub Pages publica a atualização automaticamente após alguns minutos.
 
 Endereço: https://chibata13-cpu.github.io/operacao-natal/
+\n\nAtualização de interação: agora o destinatário toca diretamente na imagem da mala para iniciar a operação. O painel separado foi removido; a música e o botão do dossier só aparecem depois do início.\n

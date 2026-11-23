@@ -47,7 +47,12 @@ button:hover,.pdf:hover{transform:translateY(-2px);filter:brightness(1.12)}
 .reveal p{color:#d9dfdc;line-height:1.6}
 .footer{text-align:center;margin-top:28px;color:#83919a;font-size:10px;letter-spacing:.12em}
 .tiny{font-size:11px;color:#9da9ae;margin-top:12px}
-@media(max-width:600px){.wrap{padding:20px 13px 35px}.topline{font-size:9px}.scene{aspect-ratio:4/3}.briefcase{width:65%;height:38%}.panel{padding:20px 15px}}
+
+.mission-trigger{cursor:pointer;outline:none;transition:transform .25s ease,box-shadow .25s ease}
+.mission-trigger:hover,.mission-trigger:focus-visible{transform:translateY(-3px);box-shadow:0 0 0 2px var(--gold),0 18px 45px #0009}
+.mission-trigger:active{transform:scale(.985)}
+.scene-label{padding:0 30px}
+\n@media(max-width:600px){.wrap{padding:20px 13px 35px}.topline{font-size:9px}.scene{aspect-ratio:4/3}.briefcase{width:65%;height:38%}.panel{padding:20px 15px}}
 </style>
 </head>
 <body>
@@ -59,25 +64,20 @@ button:hover,.pdf:hover{transform:translateY(-2px);filter:brightness(1.12)}
     <h1>OPERAÇÃO <span>NATAL</span></h1>
     <div class="subtitle">DOSSIER DE DESEJOS · EDIÇÃO ESPECIAL</div>
   </header>
-  <div class="scene" id="scene" aria-label="Mala confidencial da Operação Natal">
+  <div class="scene mission-trigger" id="scene" role="button" tabindex="0"
+       aria-label="Toca na mala para iniciar a Operação Natal">
     <div class="briefcase"><div class="money"></div><div class="hinge"></div></div>
-    <div class="scene-label">NÍVEL DE SEGURANÇA: MILIONÁRIO</div>
+    <div class="scene-label" id="sceneLabel">TOCA NA MALA PARA INICIAR A OPERAÇÃO</div>
   </div>
-  <section class="panel">
-    <div class="kicker">TRANSMISSÃO ENCRIPTADA · POLO NORTE</div>
-    <h2>Estás prestes a iniciar uma missão.</h2>
-    <p>Foi detetado um pedido de importância extraordinária. Antes de consultar o dossier, recomenda-se ativar o sistema de áudio e preparar os sentidos.</p>
-    <div class="access" id="status">AGUARDANDO AUTORIZAÇÃO DO DESTINATÁRIO</div>
-    <div class="buttons">
-      <button class="primary" id="start">▶ INICIAR OPERAÇÃO</button>
-      <span class="status" id="musicStatus">♫ BANDA SONORA: À ESPERA</span>
-    </div>
-    <div class="tiny">Sugestão: coloca os auscultadores. A música começa no primeiro clique em «Iniciar Operação».</div>
-    <div id="musicPlayer" class="hidden" style="margin:18px auto 0;max-width:560px">
-      <div class="access">BANDA SONORA ORIGINAL · OPERAÇÃO NATAL</div>
+  <section class="reveal" id="reveal">
+    <div class="classified">✓ ACESSO AUTORIZADO</div>
+    <h3>Missão: encontrar o presente perfeito.</h3>
+    <p>O destino do Natal está nas tuas mãos. O dossier contém informação altamente confidencial — incluindo um pedido financeiro de proporções… generosas.</p>
+    <div class="access" id="musicStatus">♫ BANDA SONORA: À ESPERA</div>
+    <div id="musicPlayer" class="hidden" style="margin:18px auto;max-width:560px">
       <div style="border:1px solid #9d824e;border-radius:12px;padding:16px;background:rgba(5,10,15,.35)">
         <div style="font-family:Georgia,serif;color:#f8f1e3;font-size:20px">A Missão Começa</div>
-        <div class="tiny">Composição instrumental exclusiva · 38 segundos · edição cinematográfica</div>
+        <div class="tiny">Composição instrumental exclusiva · edição cinematográfica</div>
         <div style="height:3px;background:#46515b;border-radius:8px;margin:14px 0 12px;overflow:hidden"><div id="musicProgress" style="height:100%;width:0;background:#d7b56d"></div></div>
         <div class="buttons" style="margin-top:8px">
           <button class="secondary" id="musicToggle">Ⅱ PAUSAR BANDA SONORA</button>
@@ -86,12 +86,7 @@ button:hover,.pdf:hover{transform:translateY(-2px);filter:brightness(1.12)}
       <audio id="christmasAudio" src="operacao-natal-banda-sonora.mp3" preload="auto" loop></audio>
       <div class="tiny" id="musicHint">Banda sonora original, sem anúncios e sem serviços externos.</div>
     </div>
-  </section>
-  <section class="reveal" id="reveal">
-    <div class="classified">✓ ACESSO AUTORIZADO</div>
-    <h3>Missão: encontrar o presente perfeito.</h3>
-    <p>O destino do Natal está nas tuas mãos. O dossier contém informação altamente confidencial — incluindo um pedido financeiro de proporções… generosas.</p>
-    <a class="pdf" href="dossier-operacao-natal.pdf" target="_blank" rel="noopener">CONSULTAR DOCUMENTO CLASSIFICADO</a>
+    <a class="pdf" href="dossier-operacao-natal.pdf" target="_blank" rel="noopener">CONSULTAR DOCUMENTO CLASSIFICADO ↗</a>
   </section>
   <footer class="footer">NORTH POLE · DEPARTAMENTO DE PRESENTES · FIM DA TRANSMISSÃO</footer>
 </main>
@@ -134,13 +129,17 @@ christmasAudio.addEventListener('timeupdate',()=>{
     musicProgress.style.width=(christmasAudio.currentTime/christmasAudio.duration*100)+'%';
   }
 });
-document.getElementById('start').addEventListener('click',()=>{
+function launchOperation(){
+  if(musicStarted) return;
   document.getElementById('scene').classList.add('open');
-  document.getElementById('status').textContent='IDENTIDADE VALIDADA · A ABRIR COFRE...';
+  document.getElementById('sceneLabel').textContent='✓ OPERAÇÃO INICIADA · ACESSO AUTORIZADO';
+  document.getElementById('scene').setAttribute('aria-label','Operação Natal iniciada');
   document.getElementById('reveal').classList.add('show');
-  document.getElementById('start').textContent='✓ OPERAÇÃO INICIADA';
-  document.getElementById('start').disabled=true;
   startChristmasMusic();
+}
+document.getElementById('scene').addEventListener('click',launchOperation);
+document.getElementById('scene').addEventListener('keydown',(event)=>{
+  if(event.key==='Enter'||event.key===' '){event.preventDefault();launchOperation();}
 });
 </script>
 </body>
