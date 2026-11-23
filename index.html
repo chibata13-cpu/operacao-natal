@@ -75,11 +75,17 @@ button:hover,.pdf:hover{transform:translateY(-2px);filter:brightness(1.12)}
     </div>
     <div class="tiny">Sugestão: coloca os auscultadores. A música começa no primeiro clique em «Iniciar Operação».</div>
     <div id="musicPlayer" class="hidden" style="margin:18px auto 0;max-width:560px">
-      <div class="access">BANDA SONORA OFICIAL · MARIAH CAREY</div>
-      <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border:1px solid #9d824e;border-radius:12px">
-        <iframe id="youtubePlayer" title="Mariah Carey - All I Want for Christmas Is You" style="position:absolute;inset:0;width:100%;height:100%;border:0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+      <div class="access">BANDA SONORA ORIGINAL · OPERAÇÃO NATAL</div>
+      <div style="border:1px solid #9d824e;border-radius:12px;padding:16px;background:rgba(5,10,15,.35)">
+        <div style="font-family:Georgia,serif;color:#f8f1e3;font-size:20px">A Missão Começa</div>
+        <div class="tiny">Composição instrumental exclusiva · 38 segundos · edição cinematográfica</div>
+        <div style="height:3px;background:#46515b;border-radius:8px;margin:14px 0 12px;overflow:hidden"><div id="musicProgress" style="height:100%;width:0;background:#d7b56d"></div></div>
+        <div class="buttons" style="margin-top:8px">
+          <button class="secondary" id="musicToggle">Ⅱ PAUSAR BANDA SONORA</button>
+        </div>
       </div>
-      <div class="tiny">Se a reprodução não começar automaticamente, carrega em Play no leitor.</div>
+      <audio id="christmasAudio" src="operacao-natal-banda-sonora.mp3" preload="auto" loop></audio>
+      <div class="tiny" id="musicHint">Banda sonora original, sem anúncios e sem serviços externos.</div>
     </div>
   </section>
   <section class="reveal" id="reveal">
@@ -94,17 +100,41 @@ button:hover,.pdf:hover{transform:translateY(-2px);filter:brightness(1.12)}
 const snow=document.getElementById('snow');
 for(let i=0;i<48;i++){const f=document.createElement('i');f.className='flake';f.textContent='✦';f.style.left=Math.random()*100+'%';f.style.fontSize=(5+Math.random()*9)+'px';f.style.animationDuration=(7+Math.random()*12)+'s';f.style.animationDelay=(-Math.random()*15)+'s';snow.appendChild(f)}
 let musicStarted=false;
+const christmasAudio=document.getElementById('christmasAudio');
+const musicToggle=document.getElementById('musicToggle');
+const musicStatus=document.getElementById('musicStatus');
+const musicProgress=document.getElementById('musicProgress');
 function startChristmasMusic(){
   if(musicStarted) return;
   musicStarted=true;
-  const player=document.getElementById('musicPlayer');
-  const frame=document.getElementById('youtubePlayer');
-  player.classList.remove('hidden');
-  // The iframe is created as a direct result of the user's click, which is the browser-approved
-  // point to request audible playback. YouTube may still show its own Play control on some devices.
-  frame.src='https://www.youtube-nocookie.com/embed/aAkMkVFwAoo?autoplay=1&playsinline=1&rel=0&modestbranding=1';
-  document.getElementById('musicStatus').textContent='♫ A TOCAR · MARIAH CAREY';
+  document.getElementById('musicPlayer').classList.remove('hidden');
+  christmasAudio.volume=0.82;
+  christmasAudio.play().then(()=>{
+    musicStatus.textContent='♫ A TOCAR · BANDA SONORA ORIGINAL';
+    musicToggle.textContent='Ⅱ PAUSAR BANDA SONORA';
+  }).catch(()=>{
+    musicStatus.textContent='♫ PRONTA A REPRODUZIR';
+    document.getElementById('musicHint').textContent='O navegador bloqueou a reprodução automática. Carrega em «TOCAR BANDA SONORA».';
+    musicToggle.textContent='▶ TOCAR BANDA SONORA';
+  });
 }
+musicToggle.addEventListener('click',()=>{
+  if(christmasAudio.paused){
+    christmasAudio.play().then(()=>{
+      musicStatus.textContent='♫ A TOCAR · BANDA SONORA ORIGINAL';
+      musicToggle.textContent='Ⅱ PAUSAR BANDA SONORA';
+    }).catch(()=>{});
+  }else{
+    christmasAudio.pause();
+    musicStatus.textContent='♫ EM PAUSA';
+    musicToggle.textContent='▶ RETOMAR BANDA SONORA';
+  }
+});
+christmasAudio.addEventListener('timeupdate',()=>{
+  if(christmasAudio.duration){
+    musicProgress.style.width=(christmasAudio.currentTime/christmasAudio.duration*100)+'%';
+  }
+});
 document.getElementById('start').addEventListener('click',()=>{
   document.getElementById('scene').classList.add('open');
   document.getElementById('status').textContent='IDENTIDADE VALIDADA · A ABRIR COFRE...';

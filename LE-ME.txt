@@ -1,19 +1,24 @@
 # Operação Natal — experiência multimédia
 
-Inclui a página inicial, a capa ilustrada, o dossier PDF e a banda sonora através do leitor oficial do YouTube.
+## Ficheiros
+- `index.html` — página da experiência.
+- `operacao-natal-banda-sonora.mp3` — banda sonora instrumental original, criada para a Operação Natal.
+- `operacao-natal-capa.png` — imagem de ambiente natalício.
+- `dossier-operacao-natal.pdf` — dossier final em PDF.
+- `LE-ME.txt` — estas instruções.
 
 ## Música
-A faixa escolhida é “All I Want for Christmas Is You”, de Mariah Carey, reproduzida pelo YouTube (ID do vídeo: aAkMkVFwAoo). A reprodução é solicitada quando o destinatário carrega em **INICIAR OPERAÇÃO**. Os navegadores bloqueiam normalmente áudio automático antes de uma interação do utilizador; em alguns dispositivos o YouTube poderá ainda exigir que se carregue em Play no próprio leitor.
+A banda sonora é uma composição instrumental original, com ambiente cinematográfico natalício, metais, cordas, sinos e percussão. Tem cerca de 38 segundos e repete em loop. O ficheiro MP3 está incluído no repositório, por isso não há anúncios, YouTube ou serviços externos.
 
-A música não está descarregada nem incorporada no ZIP: é reproduzida pelo YouTube, respeitando os direitos de autor e os controlos da plataforma.
+A reprodução começa no primeiro clique em **INICIAR OPERAÇÃO**. Os navegadores podem bloquear áudio automático antes de uma interação do utilizador; por isso, o clique de início autoriza a reprodução. Se o dispositivo ainda bloquear, aparece um botão para iniciar a música manualmente.
 
-## Publicar a atualização no GitHub Pages
+## Atualizar o GitHub Pages
 1. Extrai o ZIP.
-2. No repositório GitHub `operacao-natal`, abre **Add file → Upload files**.
-3. Carrega os ficheiros atualizados `index.html`, `operacao-natal-capa.png`, `dossier-operacao-natal.pdf` e `LE-ME.txt`.
-4. Confirma que os ficheiros ficam na raiz do repositório.
-5. Escolhe **Commit changes**. Se o GitHub perguntar se quer substituir `index.html` e os restantes ficheiros, confirma.
+2. No repositório `operacao-natal`, abre **Add file → Upload files**.
+3. Carrega os ficheiros `index.html`, `operacao-natal-banda-sonora.mp3`, `operacao-natal-capa.png`, `dossier-operacao-natal.pdf` e `LE-ME.txt` para a raiz.
+4. Confirma que os nomes ficam exatamente iguais.
+5. Clica em **Commit changes**.
 
 O GitHub Pages publica a atualização automaticamente após alguns minutos.
 
-Endereço esperado: https://chibata13-cpu.github.io/operacao-natal/
+Endereço: https://chibata13-cpu.github.io/operacao-natal/
