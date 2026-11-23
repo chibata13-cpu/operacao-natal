@@ -28,3 +28,6 @@ Banda sonora atualizada: instrumental natalício original, com melodia de sinos/
 
 
 Banda sonora revista: versão natalícia cinematográfica de aproximadamente 47 segundos, em compasso ternário, com melodia variada, cordas quentes, celesta/sinos e guizos discretos. Mantém o nome operacao-natal-banda-sonora.mp3 para substituir diretamente a faixa anterior.
+
+
+Banda sonora V3: composição original com piano em primeiro plano, cordas cinematográficas, sinos pontuais e melodia desenvolvida em frases variadas. O index.html referencia a faixa com ?v=3 para evitar que o navegador reutilize a versão anterior em cache.
