@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101c2c">
+<title>Operação Natal | Acesso Reservado</title>
+<style>
+:root{--navy:#101c2c;--navy2:#1b2b40;--gold:#d7b56d;--cream:#f8f1e3;--red:#b84245;--mint:#b8cdbb}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% 15%,#26394b 0,#101c2c 48%,#080e17 100%);color:var(--cream);font-family:Inter,Segoe UI,Arial,sans-serif;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.16;background-image:linear-gradient(transparent 50%,rgba(0,0,0,.2) 50%);background-size:100% 4px;z-index:5}
+.snow{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:1}
+.flake{position:absolute;top:-10px;color:#fff;opacity:.75;animation:fall linear infinite;text-shadow:0 0 8px white}
+@keyframes fall{to{transform:translateY(110vh) translateX(30px) rotate(360deg)}}
+.wrap{position:relative;z-index:2;max-width:900px;margin:auto;padding:30px 20px 55px}
+.topline{display:flex;justify-content:space-between;gap:12px;align-items:center;color:var(--gold);font-size:11px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;border-bottom:1px solid #806b43;padding:8px 0 15px}
+.status{border:1px solid #9d824e;border-radius:99px;padding:7px 11px;color:var(--mint);font-size:10px;letter-spacing:.12em}
+.hero{text-align:center;padding:44px 0 20px}
+.kicker{color:var(--gold);font-size:11px;font-weight:800;letter-spacing:.32em}
+h1{font-family:Georgia,serif;font-size:clamp(43px,9vw,86px);line-height:.94;letter-spacing:.035em;margin:14px 0 8px;text-shadow:0 4px 25px #000}
+h1 span{display:block;color:var(--gold)}
+.subtitle{color:var(--mint);font-size:12px;letter-spacing:.22em;font-weight:700}
+.scene{position:relative;margin:28px auto 22px;max-width:690px;aspect-ratio:16/8.2;border:1px solid #9d824e;border-radius:18px;overflow:hidden;background:linear-gradient(120deg,rgba(5,10,15,.25),rgba(5,10,15,.78)),url('operacao-natal-capa.png') center/cover}
+.scene:after{content:"";position:absolute;inset:12px;border:1px solid rgba(215,181,109,.55);border-radius:12px;pointer-events:none}
+.briefcase{position:absolute;left:50%;top:52%;transform:translate(-50%,-50%) rotate(-3deg);width:min(48%,330px);height:43%;background:linear-gradient(145deg,#bd9651,#5c3d1d 28%,#171a1c 60%,#8d6635);border:5px solid #c5a15c;border-radius:15px 15px 23px 23px;box-shadow:0 20px 40px #000b,inset 0 0 0 3px #332619;transition:transform 1s cubic-bezier(.2,.8,.2,1)}
+.briefcase:before{content:"";position:absolute;left:35%;top:-20px;width:30%;height:23px;border:5px solid #c5a15c;border-bottom:0;border-radius:12px 12px 0 0}
+.briefcase:after{content:"OPERAÇÃO\\A NATAL";white-space:pre;position:absolute;inset:18% 10%;display:grid;place-items:center;text-align:center;color:#ffdf83;font-family:Georgia,serif;font-weight:bold;font-size:clamp(13px,2.7vw,23px);letter-spacing:.08em;text-shadow:0 0 12px #ffbf48}
+.money{position:absolute;bottom:13%;left:14%;right:14%;height:20%;background:repeating-linear-gradient(90deg,#d5c18a 0 34px,#77916b 34px 37px);border:2px solid #e3d39b;box-shadow:0 5px 12px #000}
+.hinge{position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:18%;height:11px;background:#d7b56d;border-radius:3px}
+.open .briefcase{transform:translate(-50%,-58%) rotateX(18deg) rotate(-3deg);box-shadow:0 0 55px #e8b95b66,0 20px 40px #000b}
+.scene-label{position:absolute;bottom:18px;left:0;right:0;text-align:center;color:#fff1c8;font-size:10px;letter-spacing:.2em;font-weight:800;text-shadow:0 2px 8px #000}
+.panel{max-width:690px;margin:0 auto;background:linear-gradient(135deg,rgba(27,43,64,.92),rgba(12,21,33,.94));border:1px solid #8d7448;border-radius:16px;padding:24px;text-align:center;box-shadow:0 18px 55px #0006}
+.panel h2{font-family:Georgia,serif;font-size:25px;margin:0 0 8px;color:var(--gold)}
+.panel p{color:#d9dfdc;line-height:1.6;font-size:14px;margin:8px auto;max-width:550px}
+.access{margin:17px 0 6px;color:var(--mint);font-size:11px;letter-spacing:.18em;font-weight:800}
+.buttons{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:19px}
+button,.pdf{border:0;border-radius:99px;padding:13px 20px;font-weight:800;font-size:12px;letter-spacing:.08em;text-decoration:none;cursor:pointer;transition:.2s}
+.primary{background:linear-gradient(135deg,#e4c77e,#a87b35);color:#171b20;box-shadow:0 5px 20px #c99e4b44}
+.secondary,.pdf{background:transparent;color:var(--cream);border:1px solid #a88b55}
+button:hover,.pdf:hover{transform:translateY(-2px);filter:brightness(1.12)}
+.hidden{display:none}
+.reveal{max-width:690px;margin:18px auto 0;text-align:center;opacity:0;transform:translateY(12px);transition:all .8s}
+.reveal.show{opacity:1;transform:none}
+.reveal .classified{font-size:10px;color:var(--red);letter-spacing:.25em;font-weight:900}
+.reveal h3{font: bold 28px Georgia,serif;color:var(--gold);margin:8px}
+.reveal p{color:#d9dfdc;line-height:1.6}
+.footer{text-align:center;margin-top:28px;color:#83919a;font-size:10px;letter-spacing:.12em}
+.tiny{font-size:11px;color:#9da9ae;margin-top:12px}
+@media(max-width:600px){.wrap{padding:20px 13px 35px}.topline{font-size:9px}.scene{aspect-ratio:4/3}.briefcase{width:65%;height:38%}.panel{padding:20px 15px}}
+</style>
+</head>
+<body>
+<div class="snow" id="snow"></div>
+<main class="wrap">
+  <div class="topline"><span>North Pole Security System</span><span class="status">● ACESSO RESERVADO</span></div>
+  <header class="hero">
+    <div class="kicker">CLASSIFIED MISSION · 25.12</div>
+    <h1>OPERAÇÃO <span>NATAL</span></h1>
+    <div class="subtitle">DOSSIER DE DESEJOS · EDIÇÃO ESPECIAL</div>
+  </header>
+  <div class="scene" id="scene" aria-label="Mala confidencial da Operação Natal">
+    <div class="briefcase"><div class="money"></div><div class="hinge"></div></div>
+    <div class="scene-label">NÍVEL DE SEGURANÇA: MILIONÁRIO</div>
+  </div>
+  <section class="panel">
+    <div class="kicker">TRANSMISSÃO ENCRIPTADA · POLO NORTE</div>
+    <h2>Estás prestes a iniciar uma missão.</h2>
+    <p>Foi detetado um pedido de importância extraordinária. Antes de consultar o dossier, recomenda-se ativar o sistema de áudio e preparar os sentidos.</p>
+    <div class="access" id="status">AGUARDANDO AUTORIZAÇÃO DO DESTINATÁRIO</div>
+    <div class="buttons">
+      <button class="primary" id="start">▶ INICIAR OPERAÇÃO</button>
+      <button class="secondary" id="sound" disabled>♫ SOM: DESLIGADO</button>
+      <a class="pdf" href="dossier-operacao-natal.pdf" target="_blank" rel="noopener">ABRIR DOSSIER PDF ↗</a>
+    </div>
+    <div class="tiny">Sugestão: coloca os auscultadores. A experiência começa ao carregar no botão.</div>
+  </section>
+  <section class="reveal" id="reveal">
+    <div class="classified">✓ ACESSO AUTORIZADO</div>
+    <h3>Missão: encontrar o presente perfeito.</h3>
+    <p>O destino do Natal está nas tuas mãos. O dossier contém informação altamente confidencial — incluindo um pedido financeiro de proporções… generosas.</p>
+    <a class="pdf" href="dossier-operacao-natal.pdf" target="_blank" rel="noopener">CONSULTAR DOCUMENTO CLASSIFICADO</a>
+  </section>
+  <footer class="footer">NORTH POLE · DEPARTAMENTO DE PRESENTES · FIM DA TRANSMISSÃO</footer>
+</main>
+<script>
+const snow=document.getElementById('snow');
+for(let i=0;i<48;i++){const f=document.createElement('i');f.className='flake';f.textContent='✦';f.style.left=Math.random()*100+'%';f.style.fontSize=(5+Math.random()*9)+'px';f.style.animationDuration=(7+Math.random()*12)+'s';f.style.animationDelay=(-Math.random()*15)+'s';snow.appendChild(f)}
+let ctx=null, master=null, nodes=[], playing=false;
+function note(freq,start,dur,type='sine',gain=.03){const o=ctx.createOscillator(),g=ctx.createGain();o.type=type;o.frequency.setValueAtTime(freq,start);g.gain.setValueAtTime(.0001,start);g.gain.exponentialRampToValueAtTime(gain,start+.12);g.gain.exponentialRampToValueAtTime(.0001,start+dur);o.connect(g);g.connect(master);o.start(start);o.stop(start+dur+.04);nodes.push(o)}
+function chord(freqs,t,dur){freqs.forEach((f,i)=>note(f,t+i*.035,dur,'triangle',.018))}
+function startScore(){
+ if(!ctx){ctx=new (window.AudioContext||window.webkitAudioContext)();master=ctx.createGain();master.gain.value=.65;master.connect(ctx.destination);}
+ const now=ctx.currentTime+.1;
+ // Original cinematic winter fanfare: warm sustained chords, low pulses and a rising bell-like motif.
+ const progression=[[130.81,164.81,196],[110,146.83,174.61],[87.31,130.81,164.81],[98,146.83,196]];
+ progression.forEach((ch,i)=>{const t=now+i*2.4;chord(ch,t,2.25);note(ch[0]/2,t,2.1,'sine',.055);});
+ const melody=[523.25,659.25,783.99,1046.5,987.77,783.99,659.25,783.99,880,1046.5,1174.66,1046.5];
+ melody.forEach((f,i)=>{let t=now+.3+i*.62;note(f,t,.55,'sine',.045);note(f*2,t,.28,'triangle',.009)});
+ // Rhythmic low cinematic pulses
+ for(let i=0;i<12;i++){let t=now+i*.8;note(65.41,t,.24,'sawtooth',.025);note(49,t+.38,.22,'sine',.035)}
+ // Gentle high shimmer
+ for(let i=0;i<22;i++){let t=now+i*.42;note([1567.98,1318.51,1760][i%3],t,.17,'sine',.008)}
+ // Repeat score after ~10 seconds with a short breath
+ setTimeout(()=>{if(playing){nodes=[];startScore()}},10500);
+}
+function stopScore(){playing=false;nodes.forEach(n=>{try{n.stop()}catch(e){}});nodes=[];if(master){master.gain.setTargetAtTime(.0001,ctx.currentTime,.08)}}
+document.getElementById('start').addEventListener('click',()=>{
+ document.getElementById('scene').classList.add('open');
+ document.getElementById('status').textContent='IDENTIDADE VALIDADA · A ABRIR COFRE...';
+ document.getElementById('reveal').classList.add('show');
+ document.getElementById('start').textContent='✓ OPERAÇÃO INICIADA';
+ document.getElementById('start').disabled=true;
+ if(!playing){playing=true;startScore();document.getElementById('sound').disabled=false;document.getElementById('sound').textContent='♫ SOM: LIGADO'}
+});
+document.getElementById('sound').addEventListener('click',()=>{
+ if(!ctx)return;
+ if(playing){stopScore();document.getElementById('sound').textContent='♫ SOM: DESLIGADO'}
+ else{playing=true;master.gain.setTargetAtTime(.65,ctx.currentTime,.1);startScore();document.getElementById('sound').textContent='♫ SOM: LIGADO'}
+});
+</script>
+</body>
+</html>
