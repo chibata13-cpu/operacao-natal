@@ -1,26 +1,19 @@
 # Operação Natal — experiência multimédia
 
-Este pacote contém uma pequena experiência web estática, gratuita para alojar no GitHub Pages, e o PDF final.
+Inclui a página inicial, a capa ilustrada, o dossier PDF e a banda sonora através do leitor oficial do YouTube.
 
-## Testar localmente
+## Música
+A faixa escolhida é “All I Want for Christmas Is You”, de Mariah Carey, reproduzida pelo YouTube (ID do vídeo: aAkMkVFwAoo). A reprodução é solicitada quando o destinatário carrega em **INICIAR OPERAÇÃO**. Os navegadores bloqueiam normalmente áudio automático antes de uma interação do utilizador; em alguns dispositivos o YouTube poderá ainda exigir que se carregue em Play no próprio leitor.
+
+A música não está descarregada nem incorporada no ZIP: é reproduzida pelo YouTube, respeitando os direitos de autor e os controlos da plataforma.
+
+## Publicar a atualização no GitHub Pages
 1. Extrai o ZIP.
-2. Abre `index.html` num navegador moderno (Chrome, Edge, Firefox ou Safari).
-3. Carrega em **INICIAR OPERAÇÃO** para ativar a banda sonora original gerada no próprio navegador.
-4. O botão do dossier abre `dossier-operacao-natal.pdf`.
+2. No repositório GitHub `operacao-natal`, abre **Add file → Upload files**.
+3. Carrega os ficheiros atualizados `index.html`, `operacao-natal-capa.png`, `dossier-operacao-natal.pdf` e `LE-ME.txt`.
+4. Confirma que os ficheiros ficam na raiz do repositório.
+5. Escolhe **Commit changes**. Se o GitHub perguntar se quer substituir `index.html` e os restantes ficheiros, confirma.
 
-A música só começa depois do clique, porque os navegadores bloqueiam áudio automático sem interação do utilizador. A banda sonora é original e sintetizada localmente com Web Audio API; não requer MP3 nem serviços externos.
+O GitHub Pages publica a atualização automaticamente após alguns minutos.
 
-## Publicar gratuitamente com GitHub Pages
-1. Cria uma conta gratuita em https://github.com/ (se ainda não tiveres).
-2. Cria um repositório público, por exemplo `operacao-natal`.
-3. Carrega `index.html`, `operacao-natal-capa.png` e `dossier-operacao-natal.pdf` para a raiz do repositório.
-4. Abre **Settings → Pages**.
-5. Em **Build and deployment**, escolhe **Deploy from a branch**.
-6. Seleciona a branch `main` e a pasta `/ (root)`, e guarda.
-7. O GitHub apresenta o endereço público do site, normalmente `https://TEU-UTILIZADOR.github.io/operacao-natal/`.
-
-## QR Code
-Depois de o site estar publicado, usa o endereço público para gerar o QR Code. Ainda não foi incluído um QR Code final porque o endereço público só existe depois da publicação.
-
-## Nota
-A imagem de fundo, a experiência, as animações, o áudio original e o PDF estão incluídos no pacote; não dependem de serviços de música externos.
+Endereço esperado: https://chibata13-cpu.github.io/operacao-natal/

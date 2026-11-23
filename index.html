@@ -70,10 +70,17 @@ button:hover,.pdf:hover{transform:translateY(-2px);filter:brightness(1.12)}
     <div class="access" id="status">AGUARDANDO AUTORIZAÇÃO DO DESTINATÁRIO</div>
     <div class="buttons">
       <button class="primary" id="start">▶ INICIAR OPERAÇÃO</button>
-      <button class="secondary" id="sound" disabled>♫ SOM: DESLIGADO</button>
+      <span class="status" id="musicStatus">♫ BANDA SONORA: À ESPERA</span>
       <a class="pdf" href="dossier-operacao-natal.pdf" target="_blank" rel="noopener">ABRIR DOSSIER PDF ↗</a>
     </div>
-    <div class="tiny">Sugestão: coloca os auscultadores. A experiência começa ao carregar no botão.</div>
+    <div class="tiny">Sugestão: coloca os auscultadores. A música começa no primeiro clique em «Iniciar Operação».</div>
+    <div id="musicPlayer" class="hidden" style="margin:18px auto 0;max-width:560px">
+      <div class="access">BANDA SONORA OFICIAL · MARIAH CAREY</div>
+      <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border:1px solid #9d824e;border-radius:12px">
+        <iframe id="youtubePlayer" title="Mariah Carey - All I Want for Christmas Is You" style="position:absolute;inset:0;width:100%;height:100%;border:0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+      </div>
+      <div class="tiny">Se a reprodução não começar automaticamente, carrega em Play no leitor.</div>
+    </div>
   </section>
   <section class="reveal" id="reveal">
     <div class="classified">✓ ACESSO AUTORIZADO</div>
@@ -86,37 +93,25 @@ button:hover,.pdf:hover{transform:translateY(-2px);filter:brightness(1.12)}
 <script>
 const snow=document.getElementById('snow');
 for(let i=0;i<48;i++){const f=document.createElement('i');f.className='flake';f.textContent='✦';f.style.left=Math.random()*100+'%';f.style.fontSize=(5+Math.random()*9)+'px';f.style.animationDuration=(7+Math.random()*12)+'s';f.style.animationDelay=(-Math.random()*15)+'s';snow.appendChild(f)}
-let ctx=null, master=null, nodes=[], playing=false;
-function note(freq,start,dur,type='sine',gain=.03){const o=ctx.createOscillator(),g=ctx.createGain();o.type=type;o.frequency.setValueAtTime(freq,start);g.gain.setValueAtTime(.0001,start);g.gain.exponentialRampToValueAtTime(gain,start+.12);g.gain.exponentialRampToValueAtTime(.0001,start+dur);o.connect(g);g.connect(master);o.start(start);o.stop(start+dur+.04);nodes.push(o)}
-function chord(freqs,t,dur){freqs.forEach((f,i)=>note(f,t+i*.035,dur,'triangle',.018))}
-function startScore(){
- if(!ctx){ctx=new (window.AudioContext||window.webkitAudioContext)();master=ctx.createGain();master.gain.value=.65;master.connect(ctx.destination);}
- const now=ctx.currentTime+.1;
- // Original cinematic winter fanfare: warm sustained chords, low pulses and a rising bell-like motif.
- const progression=[[130.81,164.81,196],[110,146.83,174.61],[87.31,130.81,164.81],[98,146.83,196]];
- progression.forEach((ch,i)=>{const t=now+i*2.4;chord(ch,t,2.25);note(ch[0]/2,t,2.1,'sine',.055);});
- const melody=[523.25,659.25,783.99,1046.5,987.77,783.99,659.25,783.99,880,1046.5,1174.66,1046.5];
- melody.forEach((f,i)=>{let t=now+.3+i*.62;note(f,t,.55,'sine',.045);note(f*2,t,.28,'triangle',.009)});
- // Rhythmic low cinematic pulses
- for(let i=0;i<12;i++){let t=now+i*.8;note(65.41,t,.24,'sawtooth',.025);note(49,t+.38,.22,'sine',.035)}
- // Gentle high shimmer
- for(let i=0;i<22;i++){let t=now+i*.42;note([1567.98,1318.51,1760][i%3],t,.17,'sine',.008)}
- // Repeat score after ~10 seconds with a short breath
- setTimeout(()=>{if(playing){nodes=[];startScore()}},10500);
+let musicStarted=false;
+function startChristmasMusic(){
+  if(musicStarted) return;
+  musicStarted=true;
+  const player=document.getElementById('musicPlayer');
+  const frame=document.getElementById('youtubePlayer');
+  player.classList.remove('hidden');
+  // The iframe is created as a direct result of the user's click, which is the browser-approved
+  // point to request audible playback. YouTube may still show its own Play control on some devices.
+  frame.src='https://www.youtube-nocookie.com/embed/aAkMkVFwAoo?autoplay=1&playsinline=1&rel=0&modestbranding=1';
+  document.getElementById('musicStatus').textContent='♫ A TOCAR · MARIAH CAREY';
 }
-function stopScore(){playing=false;nodes.forEach(n=>{try{n.stop()}catch(e){}});nodes=[];if(master){master.gain.setTargetAtTime(.0001,ctx.currentTime,.08)}}
 document.getElementById('start').addEventListener('click',()=>{
- document.getElementById('scene').classList.add('open');
- document.getElementById('status').textContent='IDENTIDADE VALIDADA · A ABRIR COFRE...';
- document.getElementById('reveal').classList.add('show');
- document.getElementById('start').textContent='✓ OPERAÇÃO INICIADA';
- document.getElementById('start').disabled=true;
- if(!playing){playing=true;startScore();document.getElementById('sound').disabled=false;document.getElementById('sound').textContent='♫ SOM: LIGADO'}
-});
-document.getElementById('sound').addEventListener('click',()=>{
- if(!ctx)return;
- if(playing){stopScore();document.getElementById('sound').textContent='♫ SOM: DESLIGADO'}
- else{playing=true;master.gain.setTargetAtTime(.65,ctx.currentTime,.1);startScore();document.getElementById('sound').textContent='♫ SOM: LIGADO'}
+  document.getElementById('scene').classList.add('open');
+  document.getElementById('status').textContent='IDENTIDADE VALIDADA · A ABRIR COFRE...';
+  document.getElementById('reveal').classList.add('show');
+  document.getElementById('start').textContent='✓ OPERAÇÃO INICIADA';
+  document.getElementById('start').disabled=true;
+  startChristmasMusic();
 });
 </script>
 </body>
