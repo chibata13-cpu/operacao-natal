@@ -76,7 +76,7 @@ button:hover,.pdf:hover{transform:translateY(-2px);filter:brightness(1.12)}
        aria-label="Toca na mala para iniciar a Operação Natal">
     <div class="briefcase"><div class="money"></div><div class="hinge"></div></div>
     <div class="scene-label" id="sceneLabel">TOCA NA MALA PARA INICIAR A OPERAÇÃO</div>
-    <a class="pdf scene-pdf" id="scenePdf" href="dossier-operacao-natal.pdf" target="_blank" rel="noopener">📂 ABRIR DOSSIER CLASSIFICADO ↗</a>
+    <a class="pdf" id="scenePdf" href="dossier-operacao-natal.pdf" target="_blank" rel="noopener" style="display:none;position:absolute;z-index:10;left:50%;bottom:48px;transform:translateX(-50%);width:max-content;max-width:calc(100% - 28px);padding:14px 20px;background:linear-gradient(135deg,#f0d48c,#bd9144);color:#101c2c;border:1px solid #fff0bd;border-radius:999px;font-size:12px;font-weight:900;letter-spacing:.06em;text-align:center;box-shadow:0 8px 28px #000b;white-space:normal">📂 ABRIR DOSSIER CLASSIFICADO ↗</a>
   </div>
   <section class="reveal" id="reveal">
     <div class="classified">✓ ACESSO AUTORIZADO</div>
@@ -140,6 +140,9 @@ christmasAudio.addEventListener('timeupdate',()=>{
 function launchOperation(){
   if(musicStarted) return;
   document.getElementById('scene').classList.add('open');
+  const dossierButton=document.getElementById('scenePdf');
+  dossierButton.style.display='inline-flex';
+  if(window.matchMedia('(max-width:600px)').matches){dossierButton.style.bottom='42px';dossierButton.style.fontSize='10px';dossierButton.style.padding='12px 14px';}
   document.getElementById('sceneLabel').textContent='✓ OPERAÇÃO INICIADA · ACESSO AUTORIZADO';
   document.getElementById('scene').setAttribute('aria-label','Operação Natal iniciada');
   const reveal=document.getElementById('reveal');
